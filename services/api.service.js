@@ -27,6 +27,8 @@ export const getIcon = (icon) => {
 export const getWeather = async (city) => {
   const token =
     process.env.TOKEN ?? (await getKeyValue(TOKEN_DICTIONARY.token));
+
+  const lang = (await getKeyValue(TOKEN_DICTIONARY.lang)) ?? "en";
   if (!token) {
     throw new Error(
       "Не задан ключ API задайте его через комманду -t [API_KEY]",
@@ -38,7 +40,7 @@ export const getWeather = async (city) => {
       params: {
         q: city,
         appid: token,
-        lang: "ru",
+        lang: lang,
         units: "metric",
       },
     },

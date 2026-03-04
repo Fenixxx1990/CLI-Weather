@@ -39,11 +39,26 @@ const saveCity = async (city) => {
   }
 };
 
+const saveLang = async (lang) => {
+  if (!lang.length) {
+    printError("Язык не указан");
+    return;
+  }
+  try {
+    await saveKeyValue(TOKEN_DICTIONARY.lang, lang);
+    printSuccess("Язык сохранён");
+  } catch (e) {
+    printError(e.message);
+  }
+};
+
 const getForcast = async () => {
   try {
-    const city = process.env.CITY ?? (await getKeyValue(TOKEN_DICTIONARY.city));
-    const weather = await getWeather(city);
-    printWeather(weather, getIcon(weather.weather[0].icon));
+    const cities = (await getKeyValue(TOKEN_DICTIONARY.city)) ?? ["moscow"];
+    for (const city of cities) {
+      const weather = await getWeather(city);
+      printWeather(weather, getIcon(weather.weather[0].icon));
+    }
   } catch (e) {
     if (e?.response?.status === 404) {
       printError("Неверно указан город");
@@ -61,10 +76,14 @@ const initCLI = () => {
     return printHelp();
   }
   if (args.s) {
+    // console.log(args);
     return saveCity(args.s);
   }
   if (args.t) {
     return saveToken(args.t);
+  }
+  if (args.l) {
+    return saveLang(args.l);
   }
   return getForcast();
 };
