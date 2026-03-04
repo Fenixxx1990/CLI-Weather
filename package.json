@@ -1,16 +1,16 @@
 {
-  "name": "cli-weather",
+  "name": "cli-weather-demo",
   "version": "1.0.0",
-  "description": "",
+  "description": "CLI for getting weather",
   "main": "weather.js",
   "type": "module",
   "bin": {
     "weather": "weather.js"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node weather.js"
   },
-  "author": "",
+  "author": "Fenix",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.13.6",
