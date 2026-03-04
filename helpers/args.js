@@ -7,7 +7,9 @@ export const getArgs = (args) => {
         res[value.substring(1)] = true;
       } else if (array[index + 1].charAt(0) !== "-") {
         if (value.substring(1) === "s") {
-          res[value.substring(1)] = array.slice(index + 1);
+          res[value.substring(1)] = array
+            .slice(index + 1)
+            .filter((arg) => arg.charAt(0) !== "-");
         } else {
           res[value.substring(1)] = array[index + 1];
         }

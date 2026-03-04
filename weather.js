@@ -54,7 +54,7 @@ const saveLang = async (lang) => {
 
 const getForcast = async () => {
   try {
-    const cities = await getKeyValue(TOKEN_DICTIONARY.city);
+    const cities = (await getKeyValue(TOKEN_DICTIONARY.city)) ?? ["moscow"];
     for (const city of cities) {
       const weather = await getWeather(city);
       printWeather(weather, getIcon(weather.weather[0].icon));
