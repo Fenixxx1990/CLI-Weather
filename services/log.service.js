@@ -18,3 +18,13 @@ export const printHelp = () => {
     -t [API_KEY] для сохранения токена`,
   );
 };
+
+export const printWeather = (res, icon) => {
+  console.log(
+    dedent`${chalk.bgYellow(" WEATHER ")} Погода в городе ${res.name}
+    ${icon}  ${res.weather[0].description}
+    Температура: ${res.main.temp}°C (ощущается как ${res.main.feels_like}°C)
+    Влажность: ${res.main.humidity}%
+    Скорость ветра: ${res.wind.speed} м/с`,
+  );
+};
