@@ -17,9 +17,23 @@ const saveToken = async (token) => {
   }
 };
 
+const getForcast = async () => {
+  try {
+    const weather = await getWeather("engelew");
+    console.log(weather);
+  } catch (e) {
+    if (e?.response?.status === 404) {
+      printError("Неверно указан город");
+    } else if (e?.response?.status === 401) {
+      printError("Неверно указан токен");
+    } else {
+      printError(e.message);
+    }
+  }
+};
+
 const initCLI = () => {
   const args = getArgs(process.argv);
-  // console.log(args);
   if (args.h) {
     printHelp();
   }
@@ -29,8 +43,7 @@ const initCLI = () => {
   if (args.t) {
     return saveToken(args.t);
   }
-  getWeather("engels");
-  //вывести погоду
+  getForcast();
 };
 
 initCLI();
