@@ -70,6 +70,8 @@ const getForcast = async () => {
   }
 };
 
+console.log("!");
+
 const initCLI = () => {
   const args = getArgs(process.argv);
   if (args.h) {
